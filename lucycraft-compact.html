@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LucyCraft - Where Legends Shine ✨💎</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple: #a855f7;
+            --pink: #ec4899;
+            --dark: #0a0a0a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* Background */
+        .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(168,85,247,0.3), transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(236,72,153,0.3), transparent 50%),
+                linear-gradient(180deg, rgba(10,10,10,0.5), rgba(59,7,100,0.4));
+        }
+        
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--purple);
+            border-radius: 50%;
+            animation: float 12s infinite;
+            opacity: 0;
+        }
+        
+        @keyframes float {
+            0%, 100% { opacity: 0; transform: translateY(0); }
+            50% { opacity: 0.8; transform: translateY(-100vh); }
+        }
+        
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 5%;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(168,85,247,0.3);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: #999;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--purple);
+            background: rgba(168,85,247,0.1);
+        }
+        
+        /* Pages */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 7rem 5% 3rem;
+            animation: fadeIn 0.5s;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Home */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, var(--purple), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #999;
+            margin-bottom: 2rem;
+        }
+        
+        .server-box {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(236,72,153,0.15));
+            border: 2px solid var(--purple);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+        
+        .server-ip {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .server-details {
+            color: #999;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+        
+        .quick-card {
+            background: rgba(168,85,247,0.05);
+            border: 2px solid rgba(168,85,247,0.2);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .quick-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--purple);
+            background: rgba(168,85,247,0.1);
+        }
+        
+        .quick-card h3 {
+            color: var(--purple);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-card p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Story Sidebar */
+        .story-toggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 999;
+        }
+        
+        .story-tab {
+            background: rgba(168,85,247,0.9);
+            padding: 1rem;
+            border-radius: 12px 0 0 12px;
+            cursor: pointer;
+            writing-mode: vertical-rl;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+        
+        .story-panel {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: rgba(10,10,10,0.98);
+            border-left: 2px solid var(--purple);
+            padding: 6rem 2rem 2rem;
+            overflow-y: auto;
+            transition: 0.4s;
+            z-index: 998;
+        }
+        
+        .story-panel.open {
+            right: 0;
+        }
+        
+        .story-panel h3 {
+            color: var(--purple);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .story-panel p {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .highlight {
+            color: var(--purple);
+            font-weight: 600;
+        }
+        
+        /* Compact Cards */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: rgba(168,85,247,0.05);
+            border: 2px solid rgba(168,85,247,0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+        
+        .card:hover {
+            border-color: var(--purple);
+            transform: translateY(-3px);
+        }
+        
+        .card h3 {
+            color: var(--purple);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-collapsed {
+            cursor: pointer;
+        }
+        
+        .card-collapsed .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        
+        .card-collapsed.expanded .card-content {
+            max-height: 1000px;
+        }
+        
+        .expand-icon {
+            float: right;
+            color: var(--pink);
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+        
+        .card-collapsed.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Ranks - Compact */
+        .rank-card {
+            background: rgba(168,85,247,0.05);
+            border: 2px solid rgba(168,85,247,0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .rank-card:hover {
+            border-color: var(--purple);
+        }
+        
+        .rank-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .rank-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--purple);
+            font-weight: 700;
+        }
+        
+        .rank-price {
+            color: var(--pink);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        
+        .rank-perks {
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+        
+        .rank-card.expanded .rank-perks {
+            max-height: 800px;
+            margin-top: 1.5rem;
+        }
+        
+        .rank-perks li {
+            list-style: none;
+            padding: 0.5rem 0 0.5rem 1.5rem;
+            position: relative;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .rank-perks li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--purple);
+        }
+        
+        /* Section Headers */
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--purple);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .section-desc {
+            text-align: center;
+            color: #999;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Compact Rules */
+        .rule-category {
+            margin-bottom: 1.5rem;
+        }
+        
+        .rule-cat-header {
+            background: rgba(168,85,247,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid rgba(168,85,247,0.2);
+        }
+        
+        .rule-cat-header:hover {
+            border-color: var(--purple);
+        }
+        
+        .rule-cat-header h3 {
+            color: var(--purple);
+            font-size: 1.2rem;
+        }
+        
+        .rule-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.4s;
+            padding: 0 1rem;
+        }
+        
+        .rule-category.expanded .rule-content {
+            max-height: 800px;
+            padding: 1rem;
+        }
+        
+        .rule-item {
+            padding: 0.7rem 0 0.7rem 1.5rem;
+            position: relative;
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .rule-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--pink);
+            font-size: 1.5rem;
+        }
+        
+        /* Commands Compact */
+        .cmd-section {
+            margin-bottom: 1.5rem;
+            background: rgba(168,85,247,0.05);
+            border: 2px solid rgba(168,85,247,0.2);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .cmd-header {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cmd-header:hover {
+            background: rgba(168,85,247,0.1);
+        }
+        
+        .cmd-header h3 {
+            color: var(--purple);
+            font-size: 1.3rem;
+        }
+        
+        .cmd-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+        
+        .cmd-section.expanded .cmd-body {
+            max-height: 1000px;
+            padding: 1.5rem;
+        }
+        
+        .cmd-code {
+            background: rgba(168,85,247,0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-family: monospace;
+            color: var(--purple);
+            display: inline-block;
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Vote Links */
+        .vote-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .vote-link {
+            background: rgba(168,85,247,0.1);
+            border: 2px solid rgba(168,85,247,0.3);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            transition: 0.3s;
+        }
+        
+        .vote-link:hover {
+            border-color: var(--purple);
+            transform: translateY(-5px);
+        }
+        
+        .vote-num {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--purple);
+            font-weight: 900;
+        }
+        
+        .vote-link p {
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* FAQ */
+        .faq-item {
+            background: rgba(168,85,247,0.05);
+            border: 2px solid rgba(168,85,247,0.2);
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .faq-q {
+            padding: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-q:hover {
+            background: rgba(168,85,247,0.1);
+        }
+        
+        .faq-q h3 {
+            color: var(--purple);
+            font-size: 1.1rem;
+        }
+        
+        .faq-icon {
+            color: var(--pink);
+            font-size: 1.5rem;
+            transition: 0.3s;
+        }
+        
+        .faq-item.expanded .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+        
+        .faq-item.expanded .faq-a {
+            max-height: 500px;
+            padding: 0 1.2rem 1.2rem;
+        }
+        
+        .faq-a p {
+            color: #ccc;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            border-top: 1px solid rgba(168,85,247,0.2);
+            margin-top: 4rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .story-panel { width: 90%; right: -90%; }
+            .content-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="particles" id="particles"></div>
+    
+    <!-- Story Sidebar -->
+    <div class="story-toggle">
+        <div class="story-tab" onclick="toggleStory()">LUCY'S STORY</div>
+    </div>
+    
+    <div class="story-panel" id="storyPanel">
+        <h3>Lucy in the Sky with Diamonds ✨</h3>
+        <p>Once upon a time, there lived a sweet little girl named <span class="highlight">Pale Girl</span>, who had a dog named <span class="highlight">Lucy</span>. They lived happily in a peaceful place, contented with each other's company.</p>
+        
+        <p>One day, Pale ventured into a cave to search for diamonds. Unfortunately, her torch ran out, and she awakened the <span class="highlight">Warden</span> – a fearsome creature in the ancient city.</p>
+        
+        <p>In a moment of incredible bravery, <span class="highlight">Lucy sacrificed herself</span> to save Pale from the Warden. Pale was heartbroken and eventually settled alone in the pale biome.</p>
+        
+        <p>The villagers witnessed her sorrow and decided to <span class="highlight">build a city in her honor</span>, naming it <span class="highlight">"LucyCraft"</span> – a beacon of light symbolizing Lucy's love and the joy she brought, even in absence.</p>
+        
+        <p style="color: var(--purple); font-weight: 600; margin-top: 1.5rem;">"Lucy may be gone, but her light that shines like diamond will remain in our hearts." 💎</p>
+    </div>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">LUCYCRAFT</div>
+            <div class="nav-links">
+                <a class="nav-link active" onclick="showPage('home')">Home</a>
+                <a class="nav-link" onclick="showPage('features')">Features</a>
+                <a class="nav-link" onclick="showPage('ranks')">Ranks</a>
+                <a class="nav-link" onclick="showPage('rules')">Rules</a>
+                <a class="nav-link" onclick="showPage('commands')">Commands</a>
+                <a class="nav-link" onclick="showPage('vote')">Vote</a>
+                <a class="nav-link" onclick="showPage('faq')">FAQ</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- HOME PAGE -->
+    <div class="page active" id="home">
+        <div class="hero">
+            <h1>LUCYCRAFT</h1>
+            <p class="subtitle">Where Legends Shine ✨💎</p>
+            <div class="server-box">
+                <div class="server-ip">play.lucycraft.net</div>
+                <div class="server-details">
+                    Port: 19006 | Java 1.21.8 & Bedrock 1.21.120<br>
+                    24/7 Online | Cracked/Premium Support<br>
+                    Owner: LucyFey | Released: Sept 22, 2025
+                </div>
+            </div>
+        </div>
+        
+        <div class="quick-links">
+            <div class="quick-card" onclick="showPage('features')">
+                <h3>✨ Features</h3>
+                <p>Jobs, AFK Rewards, Cosmetics, Land Claim & More</p>
+            </div>
+            <div class="quick-card" onclick="showPage('ranks')">
+                <h3>👑 Ranks</h3>
+                <p>Premium & Grindable Ranks with Amazing Perks</p>
+            </div>
+            <div class="quick-card" onclick="showPage('rules')">
+                <h3>📜 Rules</h3>
+                <p>Community Guidelines & Server Rules</p>
+            </div>
+            <div class="quick-card" onclick="showPage('commands')">
+                <h3>⚡ Commands</h3>
+                <p>Essential Commands & Tutorials</p>
+            </div>
+            <div class="quick-card" onclick="showPage('vote')">
+                <h3>🗳️ Vote</h3>
+                <p>Support Us & Get Rewards</p>
+            </div>
+            <div class="quick-card" onclick="showPage('faq')">
+                <h3>❓ FAQ</h3>
+                <p>Frequently Asked Questions</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FEATURES PAGE -->
+    <div class="page" id="features">
+        <h2>Server Features</h2>
+        <p class="section-desc">Experience the best Minecraft survival server</p>
+        
+        <div class="content-grid">
+            <div class="card"><h3>🎮 Jobs System</h3><p>Earn rewards by completing various tasks</p></div>
+            <div class="card"><h3>💤 AFK Rewards</h3><p>Get ores and diamonds while AFK</p></div>
+            <div class="card"><h3>✨ Cosmetics</h3><p>Customize your character</p></div>
+            <div class="card"><h3>🛡️ Land Claim</h3><p>Protect your builds</p></div>
+            <div class="card"><h3>💎 Diamond Trader</h3><p>Trade diamonds for claim blocks</p></div>
+            <div class="card"><h3>🗳️ Vote Rewards</h3><p>Vote daily for keys and rewards</p></div>
+            <div class="card"><h3>🎉 Piñata Party</h3><p>Break piñatas for exciting prizes</p></div>
+            <div class="card"><h3>🏪 Player Warps</h3><p>Visit player shops and locations</p></div>
+            <div class="card"><h3>⚡ Optimized</h3><p>Lag-free smooth gameplay</p></div>
+            <div class="card"><h3>🎁 Daily Rewards</h3><p>Login rewards and giveaways</p></div>
+            <div class="card"><h3>⚔️ PvP Arena</h3><p>Friendly PvP in designated areas</p></div>
+            <div class="card"><h3>🕊️ Grief-Free</h3><p>Active staff protection</p></div>
+        </div>
+    </div>
+    
+    <!-- RANKS PAGE -->
+    <div class="page" id="ranks">
+        <h2>Premium Ranks</h2>
+        <p class="section-desc">Click to expand and view perks</p>
+        
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div class="rank-card" onclick="this.classList.toggle('expanded')">
+                <div class="rank-header">
+                    <div>
+                        <div class="rank-name">⫘ SKYLIGHT ⫘</div>
+                        <div style="color: #999; font-size: 0.85rem;">Monthly Subscription</div>
+                    </div>
+                    <div class="rank-price">₱350</div>
+                </div>
+                <ul class="rank-perks">
+                    <li>/Feed, /Heal, /Nick</li>
+                    <li>15 /Homes Limit</li>
+                    <li>/Afk, /Repair Hand, /Repair All</li>
+                    <li>/Craft, /Trash, /Ender</li>
+                    <li>/Tfly - Unlimited flight (1 month)</li>
+                    <li>/Ptime, /Hat, /Kits</li>
+                    <li>4 COSMETIC KEYS</li>
+                    <li>/workbench, /anvil, /smithingtable</li>
+                    <li>/pv 1-10</li>
+                </ul>
+            </div>
+            
+            <div class="rank-card" onclick="this.classList.toggle('expanded')">
+                <div class="rank-header">
+                    <div>
+                        <div class="rank-name">⫘ LEGACY ⫘</div>
+                        <div style="color: #999; font-size: 0.85rem;">Monthly Subscription</div>
+                    </div>
+                    <div class="rank-price">₱300</div>
+                </div>
+                <ul class="rank-perks">
+                    <li>/Feed, /Heal, /Nick</li>
+                    <li>10 /Home Limits</li>
+                    <li>/Afk, /Repair Hand, /Repair All</li>
+                    <li>/Ender, /Ptime, /Hat</li>
+                    <li>/Tfly - 15 days flight</li>
+                    <li>/Kits - Legacy Kits</li>
+                    <li>/workbench, /anvil</li>
+                    <li>2 Cosmetic Keys</li>
+                    <li>/pv 1-8</li>
+                </ul>
+            </div>
+            
+            <div class="rank-card" onclick="this.classList.toggle('expanded')">
+                <div class="rank-header">
+                    <div>
+                        <div class="rank-name">⫘ LUCENT ⫘</div>
+                        <div style="color: #999; font-size: 0.85rem;">Monthly Subscription</div>
+                    </div>
+                    <div class="rank-price">₱170</div>
+                </div>
+                <ul class="rank-perks">
+                    <li>/Feed, /Heal, /Nick</li>
+                    <li>8 /Home Limits</li>
+                    <li>/Afk, /Repair Hand</li>
+                    <li>/Ender, /Hat, /Ptime</li>
+                    <li>/Kits - Lucent Kit</li>
+                    <li>/anvil</li>
+                    <li>/pv 1-6</li>
+                </ul>
+            </div>
+            
+            <div class="rank-card" onclick="this.classList.toggle('expanded')">
+                <div class="rank-header">
+                    <div>
+                        <div class="rank-name">⫘ VELOCITY ⫘</div>
+                        <div style="color: #999; font-size: 0.85rem;">Monthly Subscription</div>
+                    </div>
+                    <div class="rank-price">₱80</div>
+                </div>
+                <ul class="rank-perks">
+                    <li>/Feed, /Heal, /Nick</li>
+                    <li>6 /Home Limits</li>
+                    <li>/Afk, /Hat, /Ptime</li>
+                    <li>/Kits - Velocity Kit</li>
+                    <li>/pv 1-4</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h2 style="margin-top: 4rem;">Grindable Ranks</h2>
+        <p class="section-desc">Earn these ranks FREE through playtime!</p>
+        
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div class="rank-card" onclick="this.classList.toggle('expanded')">
+                <div class="rank-header">
+                    <div class="rank-name">✨ SPARK</div>
+                </div>
+                <ul class="rank-perks">
+                    <li>Home Limit +2, Auction Limit +3</li>
+                    <li>/afk, /workbench</li>
+                </ul>
+            </div>
+            
+            <div class="rank-card" onclick="this.classList.toggle('expanded')">
+                <div class="rank-header">
+                    <div class="rank-name">🔦 BEACON</div>
+                </div>
+                <ul class="rank-perks">
+                    <li>Home Limit +2, Auction Limit +3</li>
+                    <li>/afk, /feed, /workbench</li>
+                    <li>/enderchest, /anvil</li>
+                </ul>
+            </div>
+            
+            <div class="rank-card" onclick="this.classList.toggle('expanded')">
+                <div class="rank-header">
+                    <div class="rank-name">✨ GLIMMER</div>
+                </div>
+                <ul class="rank-perks">
+                    <li>Home Limit +2, Auction Limit +3</li>
+                    <li>/afk, /feed, /heal</li>
+                    <li>/workbench, /enderchest, /anvil</li>
+                </ul>
+            </div>
+            
+            <div class="rank-card" onclick="this.classList.toggle('expanded')">
+                <div class="rank-header">
+                    <div class="rank-name">🌟 RADIANT</div>
+                </div>
+                <ul class="rank-perks">
+                    <li>Home Limit +2, Auction Limit +3</li>
+                    <li>/afk, /feed, /heal, /hat</li>
+                    <li>/repair hand, /workbench</li>
+                    <li>/enderchest, /anvil, /nick</li>
+                </ul>
+            </div>
+            
+            <div class="rank-card" onclick="this.classList.toggle('expanded')">
+                <div class="rank-header">
+                    <div class="rank-name">💫 SHINE</div>
+                </div>
+                <ul class="rank-perks">
+                    <li>Home Limit +2, Auction Limit +3</li>
+                    <li>/afk, /feed, /heal, /hat</li>
+                    <li>/repair hand, /ptime</li>
+                    <li>/workbench, /enderchest, /anvil</li>
+                    <li>/Unlimited Fly ✈️</li>
+                </ul>
+            </div>
+            
+            <div class="rank-card" onclick="this.classList.toggle('expanded')">
+                <div class="rank-header">
+                    <div>
+                        <div class="rank-name">🌙 LUMINARY</div>
+                        <div style="color: var(--pink); font-size: 0.85rem; margin-top: 0.3rem;">End of Month Rewards</div>
+                    </div>
+                </div>
+                <ul class="rank-perks">
+                    <li>60k in-game money</li>
+                    <li>600 claim blocks</li>
+                    <li>1 Nitro Key</li>
+                    <li>2 Day FLY</li>
+                    <li>PV 1-4</li>
+                </ul>
+            </div>
+            
+            <div class="rank-card" onclick="this.classList.toggle('expanded')">
+                <div class="rank-header">
+                    <div>
+                        <div class="rank-name">🌈 AURORA</div>
+                        <div style="color: var(--pink); font-size: 0.85rem; margin-top: 0.3rem;">End of Month Rewards</div>
+                    </div>
+                </div>
+                <ul class="rank-perks">
+                    <li>120k in-game money</li>
+                    <li>600 claim blocks</li>
+                    <li>2 Nitro Keys</li>
+                    <li>3 Days FLY</li>
+                    <li>PV 1-6</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- RULES PAGE -->
+    <div class="page" id="rules">
+        <h2>Community Rules</h2>
+        <p class="section-desc">Click each category to expand</p>
+        
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div class="rule-category" onclick="this.classList.toggle('expanded')">
+                <div class="rule-cat-header">
+                    <h3>A. Player Conduct</h3>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="rule-content">
+                    <div class="rule-item"><strong>Be Kind, No Bullying!</strong> – No harassment or discrimination</div>
+                    <div class="rule-item"><strong>Keep It Clean</strong> – No swearing, slurs, or inappropriate remarks</div>
+                    <div class="rule-item"><strong>Respect Everyone</strong> – Treat all players fairly</div>
+                    <div class="rule-item"><strong>Take Care of Items</strong> – Lost items won't be replaced</div>
+                    <div class="rule-item"><strong>Respect Staff</strong> – Follow instructions politely</div>
+                    <div class="rule-item"><strong>Cute Names Only</strong> – No offensive names</div>
+                </div>
+            </div>
+            
+            <div class="rule-category" onclick="this.classList.toggle('expanded')">
+                <div class="rule-cat-header">
+                    <h3>B. Fair Gameplay</h3>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="rule-content">
+                    <div class="rule-item"><strong>No Cheating/Hacking</strong> – No unfair mods or clients</div>
+                    <div class="rule-item"><strong>No Exploiting</strong> – Report bugs, don't abuse them</div>
+                    <div class="rule-item"><strong>PVP Rules</strong> – Use /pvp in wilderness or PvP Arena</div>
+                    <div class="rule-item"><strong>Report Rule Breakers</strong> – Help keep server fair</div>
+                    <div class="rule-item"><strong>Respect Economy</strong> – No duping or scamming</div>
+                </div>
+            </div>
+            
+            <div class="rule-category" onclick="this.classList.toggle('expanded')">
+                <div class="rule-cat-header">
+                    <h3>C. Property & Griefing</h3>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="rule-content">
+                    <div class="rule-item"><strong>No Griefing</strong> – Don't destroy others' builds</div>
+                    <div class="rule-item"><strong>No Stealing</strong> – Respect claimed/unclaimed land</div>
+                    <div class="rule-item"><strong>Protect Your Land</strong> – Claim your areas!</div>
+                    <div class="rule-item"><strong>No TP-Trapping</strong> – No malicious teleports</div>
+                    <div class="rule-item"><strong>Land Activity</strong> – Inactive claims (3 months) will be removed</div>
+                </div>
+            </div>
+            
+            <div class="rule-category" onclick="this.classList.toggle('expanded')">
+                <div class="rule-cat-header">
+                    <h3>D. Community & Server</h3>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="rule-content">
+                    <div class="rule-item"><strong>No Advertising</strong> – No promoting other servers</div>
+                    <div class="rule-item"><strong>Stay Safe</strong> – No malicious links</div>
+                    <div class="rule-item"><strong>No Spam</strong> – Don't flood chat</div>
+                    <div class="rule-item"><strong>Server Stability</strong> – Don't intentionally lag server</div>
+                </div>
+            </div>
+            
+            <div class="rule-category" onclick="this.classList.toggle('expanded')">
+                <div class="rule-cat-header">
+                    <h3>E. Alt Accounts</h3>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="rule-content">
+                    <div class="rule-item"><strong>2 Accounts per IP</strong> – Bedrock & Java allowed</div>
+                    <div class="rule-item"><strong>Same IP Players</strong> – Create ticket to inform staff</div>
+                    <div class="rule-item"><strong>No Alt Abuse</strong> – Unfair advantage = ban</div>
+                </div>
+            </div>
+            
+            <div class="rule-category" onclick="this.classList.toggle('expanded')">
+                <div class="rule-cat-header">
+                    <h3>F. RedStone / Builds</h3>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="rule-content">
+                    <div class="rule-item"><strong>Auto Farms</strong> – Max 6 chunks x 2 layers</div>
+                    <div class="rule-item"><strong>Tick Farms</strong> – Max 1 chunk x 1 layer only</div>
+                    <div class="rule-item"><strong>Redstone Clocks</strong> – Must have on/off switch</div>
+                    <div class="rule-item"><strong>Animal Farms</strong> – Max 15-20 mobs per pen</div>
+                    <div class="rule-item"><strong>Auto Clocks</strong> – Use observer-based timers</div>
+                    <div class="rule-item"><strong>TNT Machines</strong> – PROHIBITED (causes lag)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- COMMANDS PAGE -->
+    <div class="page" id="commands">
+        <h2>Essential Commands</h2>
+        <p class="section-desc">Click each section to expand</p>
+        
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div class="cmd-section" onclick="this.classList.toggle('expanded')">
+                <div class="cmd-header">
+                    <h3>📍 Land Claiming</h3>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="cmd-body">
+                    <p><strong>Step 1:</strong> Craft gold shovel (1 gold + 2 sticks)</p>
+                    <p><strong>Step 2:</strong> Right-click two corners (min 100 blocks)</p>
+                    <p><span class="cmd-code">/trust [username]</span> - Give full access</p>
+                    <p><span class="cmd-code">/containertrust [username]</span> - Access chests only</p>
+                    <p><span class="cmd-code">/untrust [username]</span> - Remove access</p>
+                    <p><strong>Get More:</strong> <span class="cmd-code">/warp Dtrader</span> or <span class="cmd-code">/warp afk</span></p>
+                </div>
+            </div>
+            
+            <div class="cmd-section" onclick="this.classList.toggle('expanded')">
+                <div class="cmd-header">
+                    <h3>🏪 Auction House</h3>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="cmd-body">
+                    <p><span class="cmd-code">/ah</span> - Open auction house</p>
+                    <p><span class="cmd-code">/ah sell [price]</span> - List item (hold item)</p>
+                    <p><span class="cmd-code">/ah cancel</span> - Cancel listing</p>
+                    <p><span class="cmd-code">/ah listing</span> - View your items</p>
+                </div>
+            </div>
+            
+            <div class="cmd-section" onclick="this.classList.toggle('expanded')">
+                <div class="cmd-header">
+                    <h3>🚀 Warps & Travel</h3>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="cmd-body">
+                    <p><span class="cmd-code">/warp</span> - View all warps</p>
+                    <p><span class="cmd-code">/warp [name]</span> - Teleport to warp</p>
+                    <p><span class="cmd-code">/pwarp create [name]</span> - Create player warp</p>
+                    <p><span class="cmd-code">/pwarp go [name]</span> - Go to player warp</p>
+                </div>
+            </div>
+            
+            <div class="cmd-section" onclick="this.classList.toggle('expanded')">
+                <div class="cmd-header">
+                    <h3>👥 Teams</h3>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="cmd-body">
+                    <p><span class="cmd-code">/team create [name]</span> - Create team</p>
+                    <p><span class="cmd-code">/team invite [username]</span> - Invite player</p>
+                    <p><span class="cmd-code">/team join [name]</span> - Join team</p>
+                    <p><span class="cmd-code">/team leave</span> - Leave team</p>
+                    <p><span class="cmd-code">/team sethome [name]</span> - Set team base</p>
+                </div>
+            </div>
+            
+            <div class="cmd-section" onclick="this.classList.toggle('expanded')">
+                <div class="cmd-header">
+                    <h3>🗳️ Voting</h3>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="cmd-body">
+                    <p><span class="cmd-code">/vote</span> - Get vote links</p>
+                    <p>Vote to receive Vote Keys</p>
+                    <p>Use keys at <span class="cmd-code">/spawn</span> crates for rewards!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- VOTE PAGE -->
+    <div class="page" id="vote">
+        <h2>Vote for LucyCraft</h2>
+        <p class="section-desc">Support us and get rewards!</p>
+        
+        <div class="vote-grid">
+            <a href="https://minecraftservers.org/server/678650" target="_blank" class="vote-link">
+                <div class="vote-num">#1</div>
+                <p>MinecraftServers.org</p>
+            </a>
+            <a href="https://minecraft-mp.com/server-s348653" target="_blank" class="vote-link">
+                <div class="vote-num">#2</div>
+                <p>Minecraft-MP.com</p>
+            </a>
+            <a href="https://minecraft-server-list.com/server/514745/" target="_blank" class="vote-link">
+                <div class="vote-num">#3</div>
+                <p>Minecraft-Server-List.com</p>
+            </a>
+            <a href="https://minestatus.net/server/lucycraft.online" target="_blank" class="vote-link">
+                <div class="vote-num">#4</div>
+                <p>MineStatus.net</p>
+            </a>
+            <a href="https://minecraft.buzz/server/16493" target="_blank" class="vote-link">
+                <div class="vote-num">#5</div>
+                <p>Minecraft.buzz</p>
+            </a>
+        </div>
+    </div>
+    
+    <!-- FAQ PAGE -->
+    <div class="page" id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <p class="section-desc">Click questions to view answers</p>
+        
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div class="faq-item" onclick="this.classList.toggle('expanded')">
+                <div class="faq-q">
+                    <h3>What is LucyCraft?</h3>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-a">
+                    <p>LucyCraft is a premium Minecraft survival server inspired by the story of Pale and Lucy. We offer custom features, premium and grindable ranks, active community, and grief-free environment.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="this.classList.toggle('expanded')">
+                <div class="faq-q">
+                    <h3>How do I join?</h3>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-a">
+                    <p>Add <strong>play.lucycraft.net</strong> port <strong>19006</strong> to your server list. We support Java 1.21.8 and Bedrock 1.21.120, including cracked accounts!</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="this.classList.toggle('expanded')">
+                <div class="faq-q">
+                    <h3>Premium vs Grindable Ranks?</h3>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-a">
+                    <p><strong>Premium:</strong> Monthly paid ranks (₱80-₱350) with exclusive commands. <strong>Grindable:</strong> FREE ranks earned through playtime (Spark → Aurora).</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="this.classList.toggle('expanded')">
+                <div class="faq-q">
+                    <h3>Is griefing allowed?</h3>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-a">
+                    <p>NO! Use gold shovel to claim land (min 100 blocks). Our staff actively monitors and protects against griefing. Unclaimed land is not protected!</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="this.classList.toggle('expanded')">
+                <div class="faq-q">
+                    <h3>Auto Farms vs Tick Farms?</h3>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-a">
+                    <p><strong>Auto Farms:</strong> Normal growth, max 6 chunks x 2 layers. Uses pistons/hoppers. <strong>Tick Farms:</strong> Force instant growth, max 1 chunk x 1 layer. Can cause lag!</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="this.classList.toggle('expanded')">
+                <div class="faq-q">
+                    <h3>How to get claim blocks?</h3>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-a">
+                    <p>Trade diamonds at /warp Dtrader, earn ores at /warp afk, progress through ranks, or vote daily!</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="this.classList.toggle('expanded')">
+                <div class="faq-q">
+                    <h3>Can I use alt accounts?</h3>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-a">
+                    <p>Yes! 2 accounts per IP (Bedrock + Java). Multiple players on same IP must create ticket. No unfair advantage abuse!</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="this.classList.toggle('expanded')">
+                <div class="faq-q">
+                    <h3>How to purchase ranks?</h3>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-a">
+                    <p>Contact staff in-game or Discord. We accept GCash and Philippine payment methods. Ranks: ₱80-₱350/month.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="this.classList.toggle('expanded')">
+                <div class="faq-q">
+                    <h3>Can I apply for staff?</h3>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-a">
+                    <p>Requirements: 20+ years old (except streamers), 1 week playtime. Apply at <strong>https://forms.gle/MyAEqbUCopcrfoiF8</strong> then create ticket!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>LucyCraft © 2025 | Owner: LucyFey | Where Legends Shine ✨💎</p>
+    </footer>
+    
+    <script>
+        // Particles
+        const particles = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.top = Math.random() * 100 + '%';
+            p.style.animationDelay = Math.random() * 12 + 's';
+            particles.appendChild(p);
+        }
+        
+        // Page Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+        
+        // Story Toggle
+        function toggleStory() {
+            document.getElementById('storyPanel').classList.toggle('open');
+        }
+        
+        // Close story when clicking outside
+        document.addEventListener('click', (e) => {
+            const panel = document.getElementById('storyPanel');
+            const tab = document.querySelector('.story-tab');
+            if (!panel.contains(e.target) && !tab.contains(e.target)) {
+                panel.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
